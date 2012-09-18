@@ -1,10 +1,13 @@
+body {
+  font-family: sans-serif;
+}
 
 /* root element for tabs  */
 ul.tabs {
     list-style:none;
     margin:0 !important;
     padding:0;
-    border-bottom:1px solid #666;
+    border-bottom:1px solid #C71923;
     height:30px;
 }
 
@@ -19,17 +22,19 @@ ul.tabs li {
 
 /* link inside the tab. uses a background image */
 ul.tabs a {
-    background: url(blue.png) no-repeat -420px -31px;
-    font-size:14px;
+    background: #C71923;
+    border: 1px 1px 0 solid #C71923;
+    border-radius: 5px 5px 0 0;
+    font-size:12px;
     display:block;
     height: 30px;
     line-height:30px;
-    width: 134px;
+    width: 120px;
     text-align:center;
     text-decoration:none;
     color:#fff;
     padding:0px;
-    margin:0px;
+    margin:0 4px 0 0;
     position:relative;
     top:1px;
 }
@@ -40,15 +45,13 @@ ul.tabs a:active {
 
 /* when mouse enters the tab move the background image */
 ul.tabs a:hover {
-    background-position: -420px 0px;
-    color:#333;
+    color:#F1E5CB;
 }
 
 /* active tab uses a class name "current". its highlight is also done by moving the background image. */
 ul.tabs a.current, ul.tabs a.current:hover, ul.tabs li.current a {
-    background-position: -420px -62px;
+  color: #F1E5CB;
     cursor:default !important;
-    color:#000 !important;
 }
 
 /* Different widths for tabs: use a class name: w1, w2, w3 or w2 */

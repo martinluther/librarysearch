@@ -3,9 +3,13 @@
 .panes div {
     display:none;
     padding:15px 10px;
-    border:1px solid #999;
+    border:1px solid #C71923;
     border-top:0;
     height:200px;
     font-size:14px;
     background-color:#fff;
+}
+
+.panes div a {
+  color: #205C90;
 }
