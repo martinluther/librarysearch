@@ -3,13 +3,17 @@
 .panes div {
     display:none;
     padding:15px 10px;
-    border:1px solid #C71923;
+    border:1px solid #7195b7;
     border-top:0;
-    height:200px;
+    height:150px;
     font-size:14px;
     background-color:#fff;
 }
 
 .panes div a {
-  color: #205C90;
+  color: #7195b7;
+}
+
+a.advancedSearch {
+  font-size: small;
 }

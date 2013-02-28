@@ -2,12 +2,16 @@ body {
   font-family: sans-serif;
 }
 
+.librarySearch {
+  height: 100px;
+}
+
 /* root element for tabs  */
 ul.tabs {
     list-style:none;
     margin:0 !important;
     padding:0;
-    border-bottom:1px solid #C71923;
+    border-bottom:1px solid #205C90;
     height:30px;
 }
 
@@ -22,19 +26,19 @@ ul.tabs li {
 
 /* link inside the tab. uses a background image */
 ul.tabs a {
-    background: #C71923;
-    border: 1px 1px 0 solid #C71923;
+    background: #205C90;
+    border: 1px 1px 0 solid #7195b7;
     border-radius: 5px 5px 0 0;
     font-size:12px;
     display:block;
     height: 30px;
     line-height:30px;
-    width: 120px;
+    width: 100px;
     text-align:center;
     text-decoration:none;
     color:#fff;
     padding:0px;
-    margin:0 4px 0 0;
+    margin:0 1px 0 0;
     position:relative;
     top:1px;
 }
@@ -46,11 +50,13 @@ ul.tabs a:active {
 /* when mouse enters the tab move the background image */
 ul.tabs a:hover {
     color:#F1E5CB;
+    background: #7195b7;
 }
 
 /* active tab uses a class name "current". its highlight is also done by moving the background image. */
 ul.tabs a.current, ul.tabs a.current:hover, ul.tabs li.current a {
   color: #F1E5CB;
+  background: #7195b7;
     cursor:default !important;
 }
 
@@ -77,4 +83,12 @@ ul.tabs a.xl.current { background-position: 0 -62px; }
 /* initially all panes are hidden */
 .panes .pane {
     display:none;
+}
+
+p.libraryLinks {
+  text-align: center;
+}
+
+.discreet {
+  font-size: small;
 }

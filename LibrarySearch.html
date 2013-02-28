@@ -16,12 +16,13 @@ jQuery.noConflict();
       type="text/css" media="screen" />
 </head>
 <body>
+  <div class="librarySearch">
 <ul class="tabs">
     <li><a href="#">Catalog</a></li>
     <li><a href="#">Articles</a></li>
     <li><a href="#">e-Journals</a></li>
     <li><a href="#">e-Books</a></li>
-    <li><a href="#">Search the Library</a></li>
+    <li><a href="#">Search Library</a></li>
 </ul>
 <div class="panes">
     <div> 
@@ -43,11 +44,10 @@ jQuery.noConflict();
 
         </form> 
          
-         <p>
-            <a href="https://www.mnlinkgateway.org/">MnLink</a>
-            | <a href="http://martinluthercollege.worldcat.org/">Worldcat</a>
-            | <a href="https://www.mlc-wels.edu/library/about-the-library-pages/acquisitions">New Books</a>
-            | <a href="http://www.tds.sirsi.net/uhtbin/cgisirsi/x/x/0/57/49?user_id=MLCWEB&password=MLCWEB">My Account/Renew</a>
+         <p class="libraryLinks">
+            <a target="_blank" href="https://www.mnlinkgateway.org/">MnLink</a>
+            | <a target="_blank" href="http://martinluthercollege.worldcat.org/">Worldcat</a>
+            | <a target="_blank" href="https://www.mlc-wels.edu/library/about-the-library-pages/acquisitions">New Books</a>
         </p>
     </div> 
 
@@ -65,17 +65,46 @@ jQuery.noConflict();
                 <option value="subject">Subject</option>
             </select>
             <input class="SSCentralSearchSearchTermSubmit" type="submit" value="Search" />
-        <a href="http://tq4lw6tl4r.cs.serialssolutions.com/?SS_LibHash=TQ4LW6TL4R&searchBy=Category&searchType=advanced">Advanced Search</a>
+        <a class="advancedSearch" href="http://tq4lw6tl4r.cs.serialssolutions.com/?SS_LibHash=TQ4LW6TL4R&searchBy=Category&searchType=advanced" target="_blank">Advanced Search</a>
         </form>
-        <p class="discreet">Databases A-Z: <span class="smFont"><strong><a href="http://www.mlc-wels.edu/home/academics/library/libresources/databases#A">A</a> -&nbsp;<a class="anchor-link" href="#Bd">B</a> -&nbsp;<a class="anchor-link" href="#Cd">C</a> - <a class="anchor-link" href="#Dd">D</a> -&nbsp;<a class="anchor-link" href="#Ed">E</a> -&nbsp;<a class="anchor-link" href="#Fd">F</a> - <a class="anchor-link" href="#Gd">G</a> -&nbsp;<a class="anchor-link" href="#Hd">H</a> -&nbsp;<a class="anchor-link" href="#Id">I</a> -&nbsp;<a class="anchor-link" href="#Jd">J</a> - <a class="anchor-link" href="#Kd">K</a> -&nbsp;<a class="anchor-link" href="#Ld">L</a> - <a class="anchor-link" href="#Md">M</a> -&nbsp;<a class="anchor-link" href="#Nd">N</a> - <a class="anchor-link" href="#Od">O</a> -&nbsp;<a class="anchor-link" href="#Pd">P</a> -  <span class="lightfont">Q</span> -&nbsp;<a class="anchor-link" href="#Rd">R</a> - <a class="anchor-link" href="#Sd">S</a> -<span class="lightfont">T</span> - U</strong></span><strong> -&nbsp;<a class="anchor-link" href="#Vd">V</a> - <a class="anchor-link" href="#Wd">W</a> - <span class="lightfont">X</span> -&nbsp;<span class="lightfont">Y</span> -&nbsp;<span class="lightfont">Z</span></strong></p>
-        <p>
-            <a href="https://www.mlc-wels.edu/library/search-find-2/library-resources/databases-by-subject">Databases by Subject</a> 
-            | <a href="https://www.mlc-wels.edu/library/search-find-2/library-resources/most-used-databases">Popular Databases</a>
+        <p class="discreet">Databases A-Z:<br /> <span class="smFont"><strong>
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#A" target="_blank">A</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#B" target="_blank">B</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#C" target="_blank">C</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#D" target="_blank">D</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#E" target="_blank">E</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#F" target="_blank">F</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#G" target="_blank">G</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#H" target="_blank">H</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#I" target="_blank">I</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#J" target="_blank">J</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#K" target="_blank">K</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#L" target="_blank">L</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#M" target="_blank">M</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#N" target="_blank">N</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#O" target="_blank">O</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#P" target="_blank">P</a> -
+          <span class="lightfont">Q</span> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#R" target="_blank">R</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#S" target="_blank">S</a> -
+          <span class="lightfont">T</span> -
+          <span class="lightfont">U</span> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#V" target="_blank">V</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#W" target="_blank">W</a> -
+          <span class="lightfont">X</span> -
+          <span class="lightfont">Y</span> -
+          <span class="lightfont">Z</span></strong></p>
+        <p class="libraryLinks">
+            <a target="_blank" href="https://www.mlc-wels.edu/library/search-find-2/library-resources/databases-by-subject" target="_blank">Databases by Subject</a> 
+            | <a target="_blank" href="https://www.mlc-wels.edu/library/search-find-2/library-resources/most-used-databases" target="_blank">Popular Databases</a>
+            <br />
+            <br />
+            <strong><em>Note: Access to search results is provided only to on campus computers.</em></strong>
         </p>
     </div>
 
     <div>
-        <form method="get" action="http://TQ4LW6TL4R.search.serialssolutions.com/" name="SS_EJPSearchForm">
+        <form method="get" action="http://TQ4LW6TL4R.search.serialssolutions.com/" target="_blank" name="SS_EJPSearchForm">
             <b>Find e-resources by title or identifying number: </b>
             <div class="SS_ToolLabels" style="padding-bottom: 8px;">
                 <input checked="true" name="SS_searchTypeAll" value="yes" onclick="setAllCheckboxes(this);" type="hidden">
@@ -97,36 +126,36 @@ jQuery.noConflict();
         </form>
         <p>
             Journals Titles A-Z:<br />
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=0">0-9</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=A">A</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=B">B</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=C">C</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=D">D</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=E">E</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=F">F</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=G">G</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=H">H</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=I">I</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=J">J</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=K">K</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=L">L</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=M">M</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=N">N</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=O">O</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=P">P</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Q">Q</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=R">R</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=S">S</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=T">T</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=U">U</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=V">V</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=W">W</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=X">X</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Y">Y</a>
-            <a href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Z">Z</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=0">0-9</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=A">A</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=B">B</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=C">C</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=D">D</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=E">E</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=F">F</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=G">G</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=H">H</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=I">I</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=J">J</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=K">K</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=L">L</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=M">M</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=N">N</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=O">O</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=P">P</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Q">Q</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=R">R</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=S">S</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=T">T</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=U">U</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=V">V</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=W">W</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=X">X</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Y">Y</a>
+            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Z">Z</a>
         </p>
         
-        <form method="get" action="http://TQ4LW6TL4R.search.serialssolutions.com/" name="SS_CategorySearch">
+        <form method="get" action="http://TQ4LW6TL4R.search.serialssolutions.com/" target="_blank" name="SS_CategorySearch">
           Subject Search:<br />
           <input value="1.0" name="V" type="hidden" />
           <input value="TQ4LW6TL4R" name="L" type="hidden" />
@@ -170,22 +199,26 @@ jQuery.noConflict();
             <input name="catID" value="107367" type="hidden" />
             <input class="SSCentralSearchSearchTermSubmit" type="submit" value="Search" />
         </form>
-        <p>
+        <p class="libraryLinks">
             Download eBooks to your computer or mobile devices<br />
-            <a href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
-            | <a href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
-            | <a href="http://emil.mlc-wels.edu/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=ehost&defaultdb=nlebk">eBook Collection from EBSCO</a>
+            <a target="_blank" href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
+            | <a target="_blank" href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
+            | <a target="_blank" href="http://emil.mlc-wels.edu/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=ehost&defaultdb=nlebk">eBook Collection from EBSCO</a>
+            <br />
+            <br />
+            <strong><em>Note: Access to search results is provided only to on campus computers.</em></strong>
         </p>
     </div>
 
     <div>
-        <form action="https://www.mlc-wels.edu/search">
+        <form target="_blank" action="https://www.mlc-wels.edu/search">
             <input name="SearchableText" type="text" title="Search Library" class="searchField inputLabel" />
             <input type="submit" value="Search" />
             <input type="hidden" name="path" value="/mlc/library" />
         </form>
     </div>
 
+</div>
 </div>
 
 </body>
