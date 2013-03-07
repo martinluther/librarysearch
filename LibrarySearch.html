@@ -2,7 +2,35 @@
 <head>
 <script src="jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="jquery.tools.min.js" type="text/javascript"></script>
-<script src="http://support.ebscohost.com/eit/scripts/ebscohostsearch.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function limittoFullText(myForm) {
+	if (myForm.fulltext_checkbox.checked) myForm.clv0.value = "Y";
+	else myForm.clv0.value = "N";
+}
+function limittoScholarly(myForm) {
+	if(myForm.scholarly_checkbox.checked) myForm.clv1.value = "Y";
+	else myForm.clv1.value = "N";
+}
+function limittoCatalog(myForm) {
+	if(myForm.catalog_only_checkbox.checked) myForm.clv2.value = "Y";
+	else myForm.clv2.value = "N";
+}
+function limittoIR(myForm) {
+	if(myForm.IR_only_checkbox.checked) myForm.clv3.value = "Y";
+	else myForm.clv3.value = "N";
+}
+function ebscoPreProcess(myForm) {
+	myForm.bquery.value = myForm.search_prefix.value + myForm.uquery.value;
+}
+function limittoArticles(myForm) {
+	myForm.bquery.value += ' AND ZT Article';
+}
+function limittoBooks(myForm) {
+	myForm.bquery.value += ' AND PT Book';
+}
+//]]>
+</script>
 <script type="text/javascript">
 jQuery.noConflict();
 (function($) {
@@ -21,6 +49,7 @@ jQuery.noConflict();
 <ul class="tabs">
     <li><a href="#">Catalog</a></li>
     <li><a href="#">Discover</a></li>
+    <li><a href="#">Articles</a></li>
     <li><a href="#">e-Journals</a></li>
     <li><a href="#">e-Books</a></li>
     <li><a href="#">Search Library</a></li>
@@ -53,140 +82,177 @@ jQuery.noConflict();
     </div> 
 
     <div>
-        <form action="" onsubmit="return ebscoHostSearchGo(this);" method="post">
-            <input id="ebscohostwindow" name="ebscohostwindow" type="hidden" value="1" />
-            <input id="ebscohosturl" name="ebscohosturl" type="hidden" value="http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&scope=site&type=0&mode=and&cli0=FT&clv0=Y&cli1=FT1&clv1=Y&lang=en" />
-            <input id="ebscohostsearchsrc" name="ebscohostsearchsrc" type="hidden" value="db" />
-            <input id="ebscohostsearchmode" name="ebscohostsearchmode" type="hidden" value="+AND+" />
-            <input id="ebscohostkeywords" name="ebscohostkeywords" type="hidden" value="" />
-            <table>
-                <tr>
-                    <td><img src="http://support.epnet.com/eit/img/sbb/eds200.gif" alt="EBSCO Discover" /></td>
-                    <td>
-                        <input class="search-box" id="ebscohostsearchtext" name="ebscohostsearchtext" type="text" size="70" />
-                        <span class="button search-button"><input id="searchButton" type="submit" value="Search" /></span> 
-                        <br />
-                        <span id="guidedFieldSelectors">
-                            <input class="radio" type="radio" name="searchFieldSelector" id="guidedField_0" data_messageid="findfield_default_text" value="" checked="checked"><label class="label" for="guidedField_0"> Keyword</label>
-                            <input class="radio" type="radio" name="searchFieldSelector" id="guidedField_1" data_messageid="findfield_title_text" value="TI"><label class="label" for="guidedField_1"> Title</label>
-                            <input class="radio" type="radio" name="searchFieldSelector" id="guidedField_2" data_messageid="findfield_author_text" value="AU"><label class="label" for="guidedField_2"> Author</label>
-                        </span>
-                        <br />
-                        <span id="limitertitle">Limit your results:</span>
-                        <br />
-                        <input type="checkbox" id="chkFullText" name="chkFullText" checked="checked" /><label for="chkFullText">Full Text</label>
-                        <input type="checkbox" id="chkPeerReviewed" name="chkPeerReviewed" /><label for="chkPeerReviewed">Peer-Reviewed</label>
-                        <input type="checkbox" id="chkLibraryCollection" name="chkLibraryCollection" /><label for="chkLibraryCollection">Available in Library Collection</label>
-                    </td>
-                </tr>
-            </table>
+        <p>Search the EBSCO Discovery Service including databases, catalog, and IR</p>
+        <form action="http://search.ebscohost.com/login.aspx" method="get" target="_blank" onsubmit="ebscoPreProcess(this)">
+        <!-- Dropdown menu to prepend the selected value below to the user's search term -->
+        <select onchange="#" size="1" name="search_prefix" style="width: 100px">
+        	<option selected="selected" value="">Keyword</option>
+        	<option value="TI ">Title</option>
+        	<option value="AU ">Author</option>
+        </select>
+        <input name="direct" value="true" type="hidden" />
+        <input name="scope" value="site" type="hidden" />
+        <!-- target an EDS profile -->
+        <input name="site" value="eds-live" type="hidden" />
+        <input name="profile" value="eds" type="hidden" />
+        <!-- Auth type -->
+        <input name="authtype" value="ip,uid" type="hidden" />
+		<input name="custid" value="marluth" type="hidden" />
+		<input name="groupid" value="main" type="hidden" />
+        <!-- Limiter: Full Text -->
+        <input name="cli0" value="FT" type="hidden" />
+        <input name="clv0" value="N" type="hidden" />
+        <!-- Limiter: Scholarly/Peer-Reviewed -->
+        <input name="cli1" value="RV" type="hidden" />
+        <input name="clv1" value="N" type="hidden" />
+        <!-- Limiter: Catalog Only -->
+        <input name="cli2" value="FC" type="hidden" />
+        <input name="clv2" value="N" type="hidden" />
+        <!-- Limiter: Institutional Repositories Only -->
+        <input name="cli3" value="FC1" type="hidden" />
+        <input name="clv3" value="N" type="hidden" />
+        <!-- search box and submit button -->
+        <input name="bquery" value="" type="hidden" />
+        <input name="uquery" size="65" type="text" />
+        <input value="Search" type="submit" />
+        <br /><br />
+        <!-- Limiter Check Boxes: To display, adjust the html comment tags at desired locations -->
+        <!-- Limiter: Full text check box set the above value to Y, or alternatively you can have script append FT Y to the users search -->
+        <input name="fulltext_checkbox" id="fulltext_checkbox_all" onclick="limittoFullText(this.form)" type="checkbox" /> <label for="fulltext_checkbox_all">Full-Text (online)</label>
+        <!-- Limiter: Scholarly/Peer-Reviewed check box set the above value to Y -->
+		&nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="scholarly_checkbox" id="scholarly_checkbox_articles" onclick="limittoScholarly(this.form)" type="checkbox" /> <label for="scholarly_checkbox_articles">Scholarly (Peer Reviewed)</label>
+		<!-- Limiter: Catalog Only check box set the above value to Y -->
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input name="catalog_only_checkbox" id="catalog_only_checkbox" onclick="limittoCatalog(this.form)" type="checkbox" /> <label for="catalog_only_checkbox">Catalog Only</label>
+        <!-- Limiter: Institutional Repositories Only check box set the above value to Y
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+		<input name="IR_only_checkbox" id="IR_only_checkbox" onclick="limittoIR(this.form)" type="checkbox"> <label for="IR_only_checkbox">Institutional Repositories Only</label> -->
+
         </form>
     </div>
 
     <div>
-        <form method="get" action="http://TQ4LW6TL4R.search.serialssolutions.com/" target="_blank" name="SS_EJPSearchForm">
-            <b>Find e-resources by title or identifying number: </b>
-            <div class="SS_ToolLabels" style="padding-bottom: 8px;">
-                <input checked="true" name="SS_searchTypeAll" value="yes" onclick="setAllCheckboxes(this);" type="hidden">
-                <span class="SS_ToolLabels" style="padding-bottom: 7px;">
-                    <input name="SS_searchTypesUsed" value="yes" type="hidden">
-                </span>
-             </div>
-            <input value="1.0" name="V" type="hidden">
-            <input value="100" name="N" type="hidden">
-            <input name="L" value="TQ4LW6TL4R" type="hidden">
-            <select name="S">
-                <option value="T_W_A" selected="selected">Title contains all words</option>
-                <option value="AC_T_B">Title begins with</option>
-                <option value="AC_T_M">Title equals</option>
-                <option value="I_M">ISSN/ISBN equals</option>
-            </select>
-            <input id="SS_CFocusTag" name="C">
-            <input value="Search" type="Submit">
+        <p>This tab searches articles only in EDS</p>
+        <!-- Begin form which will construct a link into EDS http://support.epnet.com/knowledge_base/detail.php?id=2747#linksearch -->
+        <form action="http://search.ebscohost.com/login.aspx" method="get" target="_blank" onsubmit="ebscoPreProcess(this); limittoArticles(this)">
+        <!-- Dropdown menu to prepend the selected value below to the user's search term -->
+        <select onchange="#" size="1" name="search_prefix" style="width: 100px">
+        	<option selected="selected" value="">Keyword</option>
+        	<option value="TI ">Title</option>
+        	<option value="AU ">Author</option>
+        </select>
+        <input name="direct" value="true" type="hidden">
+        <input name="scope" value="site" type="hidden">
+        <!-- target an EDS profile -->
+        <input name="site" value="eds-live" type="hidden">
+        <input name="profile" value="eds" type="hidden">
+        <!-- Auth type -->
+        <input name="authtype" value="ip,uid" type="hidden">
+		<input name="custid" value="marluth" type="hidden">
+		<input name="groupid" value="main" type="hidden">
+        <!-- Full text limiter  -->
+        <input name="cli0" value="FT" type="hidden">
+        <input name="clv0" value="N" type="hidden">
+        <!-- Scholarly/Peer-reviewed limiter -->
+        <input name="cli1" value="RV" type="hidden">
+        <input name="clv1" value="N" type="hidden">
+        <!-- search box and submit button -->
+        <input name="bquery" value="" type="hidden">
+        <input name="uquery" size="65" type="text">
+        <!-- Since we only want Articles in this tab, we need to append ' AND ZT Article' to the user's search entry.  This is set in the limittoArticles(this) function in the above Javascript -->
+        <input value=" Search " type="submit">
+        <br><br>
+        <!-- Full text to have the check box set the above values to Y -->
+        <input name="fulltext_checkbox" id="fulltext_checkbox_articles" onclick="limittoFullText(this.form)" type="checkbox"> <label for="fulltext_checkbox_articles">Full-Text</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="scholarly_checkbox" id="scholarly_checkbox_articles" onclick="limittoScholarly(this.form)" type="checkbox"> <label for="scholarly_checkbox_articles">Scholarly (Peer Reviewed)</label>
         </form>
-        <p>
-            Journals Titles A-Z:<br />
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=0">0-9</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=A">A</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=B">B</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=C">C</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=D">D</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=E">E</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=F">F</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=G">G</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=H">H</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=I">I</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=J">J</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=K">K</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=L">L</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=M">M</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=N">N</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=O">O</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=P">P</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Q">Q</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=R">R</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=S">S</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=T">T</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=U">U</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=V">V</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=W">W</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=X">X</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Y">Y</a>
-            <a target="_blank" href="http://TQ4LW6TL4R.search.serialssolutions.com/?V=1.0&amp;L=TQ4LW6TL4R&amp;N=100&amp;S=T_AZ&amp;C=Z">Z</a>
+        <p class="discreet">Databases A-Z:<br /> <span class="smFont"><strong>
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#A" target="_blank">A</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#B" target="_blank">B</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#C" target="_blank">C</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#D" target="_blank">D</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#E" target="_blank">E</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#F" target="_blank">F</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#G" target="_blank">G</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#H" target="_blank">H</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#I" target="_blank">I</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#J" target="_blank">J</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#K" target="_blank">K</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#L" target="_blank">L</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#M" target="_blank">M</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#N" target="_blank">N</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#O" target="_blank">O</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#P" target="_blank">P</a> -
+          <span class="lightfont">Q</span> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#R" target="_blank">R</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#S" target="_blank">S</a> -
+          <span class="lightfont">T</span> -
+          <span class="lightfont">U</span> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#V" target="_blank">V</a> -
+          <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#W" target="_blank">W</a> -
+          <span class="lightfont">X</span> -
+          <span class="lightfont">Y</span> -
+          <span class="lightfont">Z</span></strong></p>
+        <p class="libraryLinks">
+            <a target="_blank" href="https://www.mlc-wels.edu/library/search-find-2/library-resources/databases-by-subject" target="_blank">Databases by Subject</a> 
+            | <a target="_blank" href="https://www.mlc-wels.edu/library/search-find-2/library-resources/most-used-databases" target="_blank">Popular Databases</a>
         </p>
-        
-        <form method="get" action="http://TQ4LW6TL4R.search.serialssolutions.com/" target="_blank" name="SS_CategorySearch">
-          Subject Search:<br />
-          <input value="1.0" name="V" type="hidden" />
-          <input value="TQ4LW6TL4R" name="L" type="hidden" />
-          <input value="SC" name="S" type="hidden" />
-          <select name="C">
-            <option value="">-- Please select a subject category --</option>
-            <option value="01">Art, Architecture &amp; Applied Arts</option>
-            <option value="BU">Business &amp; Economics</option>
-            <option value="11">Earth &amp; Environmental Sciences</option>
-            <option value="TE">Engineering &amp; Applied Sciences</option>
-            <option value="GI">General</option>
-            <option value="HE">Health &amp; Biological Sciences</option>
-            <option value="06">History &amp; Archaeology</option>
-            <option value="07">Journalism &amp; Communications</option>
-            <option value="08">Languages &amp; Literatures</option>
-            <option value="GO">Law, Politics &amp; Government</option>
-            <option value="10">Music, Dance, Drama &amp; Film</option>
-            <option value="RE">Philosophy &amp; Religion</option>
-            <option value="LS">Physical Sciences &amp; Mathematics</option>
-            <option value="SO">Social Sciences</option>
-          </select>
-          <input value="Search" type="submit" />
-        </form>
-
     </div>
 
     <div>
-        <form action="http://TQ4LW6TL4R.cs.serialssolutions.com/results" class="SSCentralSearchSearchForm" name="searchForm" method="post" target="new">
-            <input name="SS_LibHash" value="TQ4LW6TL4R" type="hidden" />
-            <input name="locale" value="en-us" type="hidden" />
-            <input name="action" value="start" type="hidden" />
-            <input name="dbIDList" value="ANT,EFU,CZZ,HEP,DIO" type="hidden" />
-            <input class="SSCentralSearchSearchCriteria" value="" name="term" type="text" size="40" maxlength="1000" />
-            <select class="SSCentralSearchSearchType" name="field">
-                <option value="title" selected="selected">Title</option>
-                <option value="author">Author</option>
-                <option value="keyword">Keyword</option>
-                <option value="subject">Subject</option>
-                <option value="isbn">ISBN</option>
-            </select>
-            <input name="catID" value="107367" type="hidden" />
-            <input class="SSCentralSearchSearchTermSubmit" type="submit" value="Search" />
-        </form>
+		<form name="frmAdvSearch" action="http://atoz.ebsco.com/titles.asp" method="get" target="_blank">
+        <input type="hidden" name="lang" value="" />
+        <input type="hidden" name="lang.subject" value="" />
+        <input type="hidden" name="lang.menu" value="" /> <!--'AQ.8.23.2007 - TD 1221 - Unicode Search-->
+		<p>Search for Titles</p>
+		<b>Find:</b>
+		<input type="text" name="txtKeyword" id="txtKeyword" size="65"  value="">
+		<input type="hidden" name="sid" value="260569046">
+		<input type="hidden" name="id" value="3885">
+		<input type="SUBMIT" name="cmdSearchSubmit" value="Search">
+		<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<i>To find variants of a word, truncate using an *</i>
+			
+		<br/><br/>
+
+                <table>
+	<tr>
+		<td align="left" valign="top">
+			<b>Within:</b>
+		</td>
+		<td align="left" valign="top">
+			<input type="radio" name="SF" ID="Titles" value="Titles" CHECKED><label for="Titles" class="AdditionalText">Title Name</label></INPUT>&nbsp;&nbsp;
+			<input type="radio" name="SF" ID="Publishers" value="Publishers" ><label for="Publishers" class="AdditionalText">Publisher Name</label></INPUT>&nbsp;&nbsp;
+			<input type="radio" name="SF" ID="ISSN" value="ISSN" ><label for="ISSN" class="AdditionalText">ISSN</label></INPUT>&nbsp;&nbsp;
+			<input type="radio" name="SF" ID="Subjects" value="Subjects" ><label for="Subjects" class="AdditionalText">Subjects</label></INPUT><br>
+			<input type="radio" name="SF" ID="AllFields" value="AllFields" ><label for="AllFields" class="AdditionalText">All of the above</label></INPUT>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">
+			<b>Search Type:</b>
+		</td>
+		<td align="left" valign="top">
+			<input type="radio" name="ST" ID="Contains" value="Contains" CHECKED><label for="Contains" class="AdditionalText">Contains</label></INPUT>&nbsp;&nbsp;
+
+			<input type="radio" name="ST" ID="Begins" value="Begins" ><label for="Begins" class="AdditionalText">Begins With</label></INPUT>&nbsp;&nbsp;
+			<input type="radio" name="ST" ID="Exact" value="Exact" ><label for="Exact" class="AdditionalText">Exact Match</label></INPUT>&nbsp;&nbsp;
+		</td>
+	</tr>
+                </table>
+
+		</form>
+    </div>
+
+    <div>
         <p class="libraryLinks">
             Download eBooks to your computer or mobile devices<br />
             <a target="_blank" href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
             | <a target="_blank" href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
             | <a target="_blank" href="http://emil.mlc-wels.edu/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=ehost&defaultdb=nlebk">eBook Collection from EBSCO</a>
-            <br />
-            <br />
-            <strong><em>Note: Access to search results is provided only to on campus computers.</em></strong>
         </p>
     </div>
 
