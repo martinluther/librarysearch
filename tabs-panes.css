@@ -2,10 +2,10 @@
 /* tab pane styling */
 .panes div {
     display:none;
-    padding:15px 10px;
+    padding:10px 10px;
     border:1px solid #7195b7;
     border-top:0;
-    height:170px;
+    height:185px;
     font-size:14px;
     background-color:#fff;
 }
