@@ -10,8 +10,13 @@
     background-color:#fff;
 }
 
+.panes div td {
+    font-size:14px;
+    background-color:#fff;
+}
+
 .panes div a {
-  color: #7195b7;
+  color: #205C90;
 }
 
 a.advancedSearch {

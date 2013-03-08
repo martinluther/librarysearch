@@ -51,7 +51,6 @@ jQuery.noConflict();
     <li><a href="#">Discover</a></li>
     <li><a href="#">Articles</a></li>
     <li><a href="#">e-Journals</a></li>
-    <li><a href="#">e-Books</a></li>
     <li><a href="#">Search Library</a></li>
 </ul>
 <div class="panes">
@@ -68,6 +67,7 @@ jQuery.noConflict();
                 <option value="SU^SUBJECT^SUBJECTS^^subject">Subjects</option> 
             </select> 
             <input type="submit" value="Go" align="absmiddle" width="80" height="20" /> 
+            <input type="hidden" name="library" value="MLC" />
             <input type="hidden" name="user_id" value="MLCWEB" /> 
             <input type="hidden" name="password" value="MLCWEB" /> 
             <input type="hidden" name="sort_by" value="-PBYR" /> 
@@ -79,10 +79,15 @@ jQuery.noConflict();
             | <a target="_blank" href="http://martinluthercollege.worldcat.org/">Worldcat</a>
             | <a target="_blank" href="https://www.mlc-wels.edu/library/about-the-library-pages/acquisitions">New Books</a>
         </p>
+        <p class="libraryLinks">
+            Download eBooks to your computer or mobile devices<br />
+            <a target="_blank" href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
+            | <a target="_blank" href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
+        </p>
     </div> 
 
     <div>
-        <p>Search the EBSCO Discovery Service including databases, catalog, and IR</p>
+        <p>Search Discover for books, articles, music, videos and etc.</p>
         <form action="http://search.ebscohost.com/login.aspx" method="get" target="_blank" onsubmit="ebscoPreProcess(this)">
         <!-- Dropdown menu to prepend the selected value below to the user's search term -->
         <select onchange="#" size="1" name="search_prefix" style="width: 100px">
@@ -113,7 +118,7 @@ jQuery.noConflict();
         <input name="clv3" value="N" type="hidden" />
         <!-- search box and submit button -->
         <input name="bquery" value="" type="hidden" />
-        <input name="uquery" size="65" type="text" />
+        <input name="uquery" size="45" type="text" />
         <input value="Search" type="submit" />
         <br /><br />
         <!-- Limiter Check Boxes: To display, adjust the html comment tags at desired locations -->
@@ -124,7 +129,7 @@ jQuery.noConflict();
         <input name="scholarly_checkbox" id="scholarly_checkbox_articles" onclick="limittoScholarly(this.form)" type="checkbox" /> <label for="scholarly_checkbox_articles">Scholarly (Peer Reviewed)</label>
 		<!-- Limiter: Catalog Only check box set the above value to Y -->
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="catalog_only_checkbox" id="catalog_only_checkbox" onclick="limittoCatalog(this.form)" type="checkbox" /> <label for="catalog_only_checkbox">Catalog Only</label>
+		<input name="catalog_only_checkbox" id="catalog_only_checkbox" onclick="limittoCatalog(this.form)" type="checkbox" /> <label for="catalog_only_checkbox">MLC Catalog Only</label>
         <!-- Limiter: Institutional Repositories Only check box set the above value to Y
                             &nbsp;&nbsp;&nbsp;&nbsp;
 		<input name="IR_only_checkbox" id="IR_only_checkbox" onclick="limittoIR(this.form)" type="checkbox"> <label for="IR_only_checkbox">Institutional Repositories Only</label> -->
@@ -133,7 +138,7 @@ jQuery.noConflict();
     </div>
 
     <div>
-        <p>This tab searches articles only in EDS</p>
+        <p>This tab searches articles from resources privided by the MLC Library.</p>
         <!-- Begin form which will construct a link into EDS http://support.epnet.com/knowledge_base/detail.php?id=2747#linksearch -->
         <form action="http://search.ebscohost.com/login.aspx" method="get" target="_blank" onsubmit="ebscoPreProcess(this); limittoArticles(this)">
         <!-- Dropdown menu to prepend the selected value below to the user's search term -->
@@ -159,7 +164,7 @@ jQuery.noConflict();
         <input name="clv1" value="N" type="hidden">
         <!-- search box and submit button -->
         <input name="bquery" value="" type="hidden">
-        <input name="uquery" size="65" type="text">
+        <input name="uquery" size="45" type="text">
         <!-- Since we only want Articles in this tab, we need to append ' AND ZT Article' to the user's search entry.  This is set in the limittoArticles(this) function in the above Javascript -->
         <input value=" Search " type="submit">
         <br><br>
@@ -168,7 +173,7 @@ jQuery.noConflict();
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input name="scholarly_checkbox" id="scholarly_checkbox_articles" onclick="limittoScholarly(this.form)" type="checkbox"> <label for="scholarly_checkbox_articles">Scholarly (Peer Reviewed)</label>
         </form>
-        <p class="discreet">Databases A-Z:<br /> <span class="smFont"><strong>
+        <p class="discreet"><strong>Databases A-Z:</strong><br /> <span class="smFont">
           <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#A" target="_blank">A</a> -
           <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#B" target="_blank">B</a> -
           <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#C" target="_blank">C</a> -
@@ -194,7 +199,7 @@ jQuery.noConflict();
           <a class="anchor-link" href="http://www.mlc-wels.edu/library/search-find-2/library-resources/databases-a-z#W" target="_blank">W</a> -
           <span class="lightfont">X</span> -
           <span class="lightfont">Y</span> -
-          <span class="lightfont">Z</span></strong></p>
+          <span class="lightfont">Z</span></p>
         <p class="libraryLinks">
             <a target="_blank" href="https://www.mlc-wels.edu/library/search-find-2/library-resources/databases-by-subject" target="_blank">Databases by Subject</a> 
             | <a target="_blank" href="https://www.mlc-wels.edu/library/search-find-2/library-resources/most-used-databases" target="_blank">Popular Databases</a>
@@ -206,15 +211,15 @@ jQuery.noConflict();
         <input type="hidden" name="lang" value="" />
         <input type="hidden" name="lang.subject" value="" />
         <input type="hidden" name="lang.menu" value="" /> <!--'AQ.8.23.2007 - TD 1221 - Unicode Search-->
-		<p>Search for Titles</p>
+		<p>Search for Journal Titles</p>
 		<b>Find:</b>
-		<input type="text" name="txtKeyword" id="txtKeyword" size="65"  value="">
+		<input type="text" name="txtKeyword" id="txtKeyword" size="45"  value="">
 		<input type="hidden" name="sid" value="260569046">
 		<input type="hidden" name="id" value="3885">
 		<input type="SUBMIT" name="cmdSearchSubmit" value="Search">
 		<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<i>To find variants of a word, truncate using an *</i>
+		<i>To find variants of a word, <a href="https://www.mlc-wels.edu/library/search-find-2/glossary/truncation">truncate</a> using an *</i>
 			
 		<br/><br/>
 
@@ -224,21 +229,36 @@ jQuery.noConflict();
 			<b>Within:</b>
 		</td>
 		<td align="left" valign="top">
-			<input type="radio" name="SF" ID="Titles" value="Titles" CHECKED><label for="Titles" class="AdditionalText">Title Name</label></INPUT>&nbsp;&nbsp;
-			<input type="radio" name="SF" ID="Publishers" value="Publishers" ><label for="Publishers" class="AdditionalText">Publisher Name</label></INPUT>&nbsp;&nbsp;
-			<input type="radio" name="SF" ID="ISSN" value="ISSN" ><label for="ISSN" class="AdditionalText">ISSN</label></INPUT>&nbsp;&nbsp;
-			<input type="radio" name="SF" ID="Subjects" value="Subjects" ><label for="Subjects" class="AdditionalText">Subjects</label></INPUT><br>
+			<input type="radio" name="SF" ID="Titles" value="Titles" CHECKED><label for="Titles" class="AdditionalText">Title Name</label></INPUT>
+                                </td>
+                                <td align="left" valign="top">
+			<input type="radio" name="SF" ID="Publishers" value="Publishers" ><label for="Publishers" class="AdditionalText">Publisher Name</label></INPUT>
+                                </td>
+                                <td align="left" valign="top">
+			<input type="radio" name="SF" ID="ISSN" value="ISSN" ><label for="ISSN" class="AdditionalText">ISSN</label></INPUT>
+                                </td>
+                                <td align="left" valign="top">
+			<input type="radio" name="SF" ID="Subjects" value="Subjects" ><label for="Subjects" class="AdditionalText">Subjects</label></INPUT>
+                                </td>
+                </tr>
+                <tr>
+                                <td> </td>
+                                <td>
 			<input type="radio" name="SF" ID="AllFields" value="AllFields" ><label for="AllFields" class="AdditionalText">All of the above</label></INPUT>
 		</td>
+                                <td colspan="3"> </td>
 	</tr>
 	<tr>
 		<td align="left" valign="top">
 			<b>Search Type:</b>
 		</td>
 		<td align="left" valign="top">
-			<input type="radio" name="ST" ID="Contains" value="Contains" CHECKED><label for="Contains" class="AdditionalText">Contains</label></INPUT>&nbsp;&nbsp;
-
-			<input type="radio" name="ST" ID="Begins" value="Begins" ><label for="Begins" class="AdditionalText">Begins With</label></INPUT>&nbsp;&nbsp;
+			<input type="radio" name="ST" ID="Contains" value="Contains" CHECKED><label for="Contains" class="AdditionalText">Contains</label></INPUT> 
+                                </td>
+                                <td align="left" valign="top">
+			<input type="radio" name="ST" ID="Begins" value="Begins" ><label for="Begins" class="AdditionalText">Begins With</label></INPUT>
+                                </td>
+                                <td align="left" valign="top" colspan="2">
 			<input type="radio" name="ST" ID="Exact" value="Exact" ><label for="Exact" class="AdditionalText">Exact Match</label></INPUT>&nbsp;&nbsp;
 		</td>
 	</tr>
@@ -248,17 +268,9 @@ jQuery.noConflict();
     </div>
 
     <div>
-        <p class="libraryLinks">
-            Download eBooks to your computer or mobile devices<br />
-            <a target="_blank" href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
-            | <a target="_blank" href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
-            | <a target="_blank" href="http://emil.mlc-wels.edu/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=ehost&defaultdb=nlebk">eBook Collection from EBSCO</a>
-        </p>
-    </div>
-
-    <div>
+        <p>This tab searches the web pages of the MLC Library</p>
         <form target="_blank" action="https://www.mlc-wels.edu/search">
-            <input name="SearchableText" type="text" title="Search Library" class="searchField inputLabel" />
+            <input name="SearchableText" type="text" size="45" title="Search Library" class="searchField inputLabel" />
             <input type="submit" value="Search" />
             <input type="hidden" name="path" value="/mlc/library" />
         </form>
