@@ -47,45 +47,13 @@ jQuery.noConflict();
 <body>
   <div class="librarySearch">
 <ul class="tabs">
-    <li><a href="#">Catalog</a></li>
     <li><a href="#">Discovery</a></li>
+    <li><a href="#">Catalog</a></li>
     <li><a href="#">Articles</a></li>
     <li><a href="#">e-Journals</a></li>
     <li><a href="#">Search Library</a></li>
 </ul>
 <div class="panes">
-    <div> 
-        <form method="GET" action="http://www.tds.sirsi.net/uhtbin/cgisirsi/x/x/0/57/5?" target="_blank" onsubmit="return window.confirm(&quot;This form may not function properly due to certain security constraints.\nContinue?&quot;);"> 
-            <p><b>Search Library Catalog for:</b></p>
-            <input type="text" name="searchdata1" size="45" /> 
-            <b>In:</b> 
-            <select name="srchfield1"> 
-                <option value="GENERAL^SUBJECT^GENERAL^^words or phrase" selected>Any Field</option> 
-                <option value="AU^AUTHOR^AUTHORS^Author Processing^author">Authors</option>
-                <option value="TI^TITLE^SERIES^Title Processing^title">Titles</option> 
-                <option value="PER^PERTITLE^PERTITLE^^Title Processing">Periodical Titles</option> 
-                <option value="SU^SUBJECT^SUBJECTS^^subject">Subjects</option> 
-            </select> 
-            <input type="submit" value="Go" align="absmiddle" width="80" height="20" /> 
-            <input type="hidden" name="library" value="MLC" />
-            <input type="hidden" name="user_id" value="MLCWEB" /> 
-            <input type="hidden" name="password" value="MLCWEB" /> 
-            <input type="hidden" name="sort_by" value="-PBYR" /> 
-
-        </form> 
-         
-         <p class="libraryLinks">
-            <a target="_blank" href="https://www.mnlinkgateway.org/">MnLink</a>
-            | <a target="_blank" href="http://martinluthercollege.worldcat.org/">Worldcat</a>
-            | <a target="_blank" href="https://www.mlc-wels.edu/library/about-the-library-pages/acquisitions">New Books</a>
-        </p>
-        <p class="libraryLinks">
-            Download eBooks to your computer or mobile devices<br />
-            <a target="_blank" href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
-            | <a target="_blank" href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
-        </p>
-    </div> 
-
     <div>
         <p>Search Discovery for books, articles, music, videos and etc.</p>
         <form action="http://search.ebscohost.com.emil.mlc-wels.edu/login.aspx" method="get" target="_blank" onsubmit="ebscoPreProcess(this)">
@@ -135,6 +103,38 @@ jQuery.noConflict();
 		<input name="IR_only_checkbox" id="IR_only_checkbox" onclick="limittoIR(this.form)" type="checkbox"> <label for="IR_only_checkbox">Institutional Repositories Only</label> -->
 
         </form>
+    </div>
+    
+    <div> 
+        <form method="GET" action="http://www.tds.sirsi.net/uhtbin/cgisirsi/x/x/0/57/5?" target="_blank" onsubmit="return window.confirm(&quot;This form may not function properly due to certain security constraints.\nContinue?&quot;);"> 
+            <p><b>Search Library Catalog for:</b></p>
+            <input type="text" name="searchdata1" size="45" /> 
+            <b>In:</b> 
+            <select name="srchfield1"> 
+                <option value="GENERAL^SUBJECT^GENERAL^^words or phrase" selected>Any Field</option> 
+                <option value="AU^AUTHOR^AUTHORS^Author Processing^author">Authors</option>
+                <option value="TI^TITLE^SERIES^Title Processing^title">Titles</option> 
+                <option value="PER^PERTITLE^PERTITLE^^Title Processing">Periodical Titles</option> 
+                <option value="SU^SUBJECT^SUBJECTS^^subject">Subjects</option> 
+            </select> 
+            <input type="submit" value="Go" align="absmiddle" width="80" height="20" /> 
+            <input type="hidden" name="library" value="MLC" />
+            <input type="hidden" name="user_id" value="MLCWEB" /> 
+            <input type="hidden" name="password" value="MLCWEB" /> 
+            <input type="hidden" name="sort_by" value="-PBYR" /> 
+
+        </form> 
+         
+         <p class="libraryLinks">
+            <a target="_blank" href="https://www.mnlinkgateway.org/">MnLink</a>
+            | <a target="_blank" href="http://martinluthercollege.worldcat.org/">Worldcat</a>
+            | <a target="_blank" href="https://www.mlc-wels.edu/library/about-the-library-pages/acquisitions">New Books</a>
+        </p>
+        <p class="libraryLinks">
+            Download eBooks to your computer or mobile devices<br />
+            <a target="_blank" href="http://martinluther.lib.overdrive.com/">MLC Download Library</a>
+            | <a target="_blank" href="http://tds.lib.overdrive.com/">TdS eMedia Catalog</a>
+        </p>
     </div>
 
     <div>
