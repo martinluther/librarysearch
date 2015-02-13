@@ -3,7 +3,8 @@ var searchstring = document.getElementById('target').value + document.getElement
 var searchsite = document.getElementById('encorebase').value;
 var searchurl = searchsite + searchstring;
 
-window.location.href = searchurl;
+// window.location.href = searchurl;
+window.open(searchurl, "encorewindow");
 }
 
 function submitenter(myfield,e)
