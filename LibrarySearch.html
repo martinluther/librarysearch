@@ -39,6 +39,60 @@ jQuery.noConflict();
     });
 })(jQuery);
 </script>
+
+<script type="text/Javascript" src="screens/encorelocationfacet.js">
+//script to refine encore search results to a collection
+</script>
+
+<script type="text/javascript">
+   function searchEncore(){
+        var encoreBaseURLInput,encoreBaseURL, searchInput, scopeInput, searchString, scopeString, locationHref, charRegExString, base64Regex;
+       /*base64_encoding_map includes special characters that need to be
+        encoded using base64 - these chars are "=","/", "\", "?"
+        character : base64 encoded */
+        var base64_encoding_map = {"=":"PQ==", "/": "Lw==", "\\":"XA==", "?":"Pw=="};
+
+        var escapeRegExp = function(string) {
+            return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+        }
+       encoreBaseURLInput = document.getElementById("encoreBase");
+       searchInput = document.getElementById("encoreSearchInput");
+
+        if (searchInput && encoreBaseURLInput) {
+            encoreBaseURL = encoreBaseURLInput.value;
+            searchString = searchInput.value;
+            for(var specialChar in base64_encoding_map) {
+                charRegExString = escapeRegExp(specialChar);
+                base64Regex = new RegExp(charRegExString, "g");
+                searchString = searchString.replace(base64Regex, base64_encoding_map[specialChar])
+            }
+            searchString = encodeURIComponent(searchString);
+
+            scopeInput = document.getElementById('encoreSearchLocation');
+
+            if (scopeInput) {
+                scopeString = scopeInput.value;
+            }
+
+            if (scopeString) {
+                scopeString = encodeURIComponent(scopeString);
+                locationHref = encoreBaseURL + "C__S" + searchString + scopeString +  "__Orightresult__U";
+            } else {
+                locationHref = encoreBaseURL + "C__S" + searchString + "__Orightresult__U";
+            }
+
+			languageSetting = document.getElementById("encoreLanguage");
+
+			if (languageSetting) {
+				locationHref = locationHref + "?lang=" + languageSetting.value;
+			}
+
+            window.location.href = locationHref;
+        }
+        return false;
+    }
+</script>
+
 <link rel="stylesheet" href="tabs.css"
       type="text/css" media="screen" />
 <link rel="stylesheet" href="tabs-panes.css"
@@ -105,28 +159,20 @@ jQuery.noConflict();
         </form>
     </div>
     
-    <div> 
-        <form method="GET" action="http://www.tds.sirsi.net/uhtbin/cgisirsi/x/x/0/57/5?" target="_blank" onsubmit="return window.confirm(&quot;This form may not function properly due to certain security constraints.\nContinue?&quot;);"> 
-            <p><b>Search Library Catalog for:</b></p>
-            <input type="text" name="searchdata1" size="45" /> 
-            <b>In:</b> 
-            <select name="srchfield1"> 
-                <option value="GENERAL^SUBJECT^GENERAL^^words or phrase" selected>Any Field</option> 
-                <option value="AU^AUTHOR^AUTHORS^Author Processing^author">Authors</option>
-                <option value="TI^TITLE^SERIES^Title Processing^title">Titles</option> 
-                <option value="PER^PERTITLE^PERTITLE^^Title Processing">Periodical Titles</option> 
-                <option value="SU^SUBJECT^SUBJECTS^^subject">Subjects</option> 
-            </select> 
-            <input type="submit" value="Go" align="absmiddle" width="80" height="20" /> 
-            <input type="hidden" name="library" value="MLC" />
-            <input type="hidden" name="user_id" value="MLCWEB" /> 
-            <input type="hidden" name="password" value="MLCWEB" /> 
-            <input type="hidden" name="sort_by" value="-PBYR" /> 
-
-        </form> 
+    <div>    
+        <p><strong>Search the MLC Catalog for:</strong></p>
+        
+        <div style="display:none;">
+        <input type="hidden" name="encorebase" id="encorebase" value="http://tdslib.iii.com/iii/encore/search/C|S"/>
+        <input type="hidden" name="searchlocation" id="searchlocation" value="|Ff:facetlocations:am:am:Martin%20Luther%20College::|Orightresult?lang=eng&suite=def" /></div>
+        <div id="search_box" style="display: inline; border: 0;">
+        <input type="text" name="target" value="" id="target" onKeyPress="return submitenter(this,event)"/>
+        <input type="submit" id="go" onclick="gosearch();" value="Search"/>
+        </div>
          
          <p class="libraryLinks">
-            <a target="_blank" href="https://www.mnlinkgateway.org/">MnLink</a>
+            <a target="_blank" href="http://tdslib.iii.com/iii/encore/home?lang=eng&suite=gold&advancedSearch=true&searchString=">Advanced Search</a>
+            | <a target="_blank" href="https://www.mnlinkgateway.org/">MnLink</a>
             | <a target="_blank" href="http://martinluthercollege.worldcat.org/">Worldcat</a>
             | <a target="_blank" href="https://www.mlc-wels.edu/library/about-the-library-pages/acquisitions">New Books</a>
         </p>
